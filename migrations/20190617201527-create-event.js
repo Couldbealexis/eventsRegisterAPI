@@ -25,7 +25,7 @@ module.exports = {
         type: Sequelize.UUID,
         allowNull: false,
         references: {
-          model: 'user',
+          model: 'users',
           key: 'id',
         },
       },
@@ -42,7 +42,7 @@ module.exports = {
         type: Sequelize.UUID,
         allowNull: false,
         references: {
-          model: 'user',
+          model: 'users',
           key: 'id',
         },
       },
@@ -60,7 +60,7 @@ module.exports = {
         type: Sequelize.DATE,
       },
     }, {
-      freezeTableName: true,
+      // freezeTableName: true,
     });
   },
   down: (queryInterface, Sequelize) => {

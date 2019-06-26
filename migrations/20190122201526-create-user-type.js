@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('userType', {
+    return queryInterface.createTable('userTypes', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -27,9 +27,11 @@ module.exports = {
       },
     }, {
       freezeTableName: true,
+      // define the table's name
+      modelName: 'userType',
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('userType');
+    return queryInterface.dropTable('userTypes');
   }
 };

@@ -49,7 +49,7 @@ module.exports = {
         type: Sequelize.DATE,
       },
     }, {
-      freezeTableName: true,
+      // freezeTableName: true,
     });
   },
   down: (queryInterface, Sequelize) => {
