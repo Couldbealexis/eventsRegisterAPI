@@ -9,10 +9,10 @@ const {
   sendResponse,
 } = require('../services/response');
 
-const detail = (code) => {
+const detail = (res, id) => {
   User.findOne({
     where: {
-      code,
+      id,
     },
     attributes: {
       exclude: ['password', 'type', 'createdAt', 'updatedAt'],
@@ -22,10 +22,10 @@ const detail = (code) => {
       attributes: ['id', 'description'],
     }],
   }).then((user) => {
-    if (!user) return null;
-    return user;
+    if (!user) return sendResponse(res, 'false', '404', {}, 'Usuario no encontrado', 'User not found');
+    return sendResponse(res, 'true', '200', user);
   }).catch((err) => {
-    return null;
+    return { res: false, data: 'Usuario no encontrado', devMessage: err.message };
   });
 };
 
@@ -119,4 +119,31 @@ exports.findOne = (req, res) => {
   }).catch((err) => {
     return sendResponse(res, 'false', '404', {}, 'No se encontro al usuario', err.message);
   });
+};
+
+exports.updateOne = async (req, res) => {
+  const body = req.body;
+  const fieldsToExclude = ['password', 'id'];
+  const myFields = Object.keys(User.rawAttributes).filter(s => !fieldsToExclude.includes(s));
+  return User.update(body, {
+    fields: myFields,
+    where: { id: req.params.id } })
+    .then(async (r) => {
+      if (!r) return sendResponse(res, 'false', '404', {}, 'El usuario no fue encontrado, por favor vuelve a itentarlo', 'user not found');
+      return detail(res, req.params.id);
+    }).catch((err) => {
+      return sendResponse(res, 'false', '400', {}, 'Usuario no encontrado', err.message);
+    });
+};
+
+exports.delete = (req, res) => {
+  return User.update(body, {
+    fields: myFields,
+    where: { id: req.params.id } })
+    .then(async (r) => {
+      if (!r) return sendResponse(res, 'false', '404', {}, 'El usuario no fue encontrado, por favor vuelve a itentarlo', 'user not found');
+      return detail(res, req.params.id);
+    }).catch((err) => {
+      return sendResponse(res, 'false', '400', {}, 'Usuario no encontrado', err.message);
+    });
 };

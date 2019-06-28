@@ -9,5 +9,7 @@ router.post('/', controller.create);
 router.get('/', controller.findAll);
 // find one
 router.get('/:id', controller.findOne);
+// update one
+router.put('/:id', controller.updateOne);
 
 module.exports = router;

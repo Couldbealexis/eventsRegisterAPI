@@ -10,7 +10,13 @@ module.exports = (sequelize, DataTypes) => {
     code: DataTypes.STRING,
     phoneNumber: DataTypes.STRING,
     status: DataTypes.BOOLEAN,
-  }, {});
+  }, {
+    hooks: {
+      beforeSave: (User) => {
+        User.password = User.password && User.password != '' ? bcrypt.hashSync(User.password, 10) : '';
+      },
+    },
+  });
   user.associate = function(models) {
     // associations can be defined here
     user.belongsTo(models.userType, { foreignKey:'type' });
@@ -50,10 +56,11 @@ module.exports = (sequelize, DataTypes) => {
     return token;
   };
 
+
   // Hooks
-  user.beforeSave((User) => {
-    User.password = User.password && User.password != '' ? bcrypt.hashSync(User.password, 10) : '';
-  });
+  // user.beforeSave((User) => {
+  //   User.password = User.password && User.password != '' ? bcrypt.hashSync(User.password, 10) : '';
+  // });
 
   return user;
 };
