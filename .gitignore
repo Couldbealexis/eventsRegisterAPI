@@ -46,7 +46,6 @@ Temporary Items
 .apdisk
 
 ### Node ###
-/config/config.json
 
 # Logs
 logs
@@ -243,12 +242,5 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
-
-#config/config.json
-
-# images/
-# images/cover/
-# images/profile/
-
 
 # End of https://www.gitignore.io/api/node,linux,macos,windows,webstorm,visualstudiocode
