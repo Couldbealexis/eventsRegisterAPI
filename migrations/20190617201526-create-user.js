@@ -53,9 +53,6 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE,
       },
-    }, {
-      modelName: 'user',
-      freezeTableName: true,
     });
   },
   down: (queryInterface, Sequelize) => {

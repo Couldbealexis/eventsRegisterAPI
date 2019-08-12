@@ -31,13 +31,20 @@ const detail = (res, id) => {
 
 exports.create = async (req, res) => {
   const body = req.body;
-  const u = await User.findOne({
+  let u = await User.findOne({
     where: {
       email: body.email,
       status: 1,
     },
   });
   if (u) sendResponse(res, 'false', '400', {}, 'El correo ya se encuentra en uso', 'email already in use');
+  u = await User.findOne({
+    where: {
+      code: body.code,
+      status: 1,
+    },
+  });
+  if (u) sendResponse(res, 'false', '400', {}, 'El código ya se encuentra en uso', 'code already in use');
   let user = User.build(body);
   user.id = uuid();
   user.save()

@@ -28,7 +28,6 @@ module.exports = {
     }, {
       freezeTableName: true,
       // define the table's name
-      modelName: 'userType',
     });
   },
   down: (queryInterface, Sequelize) => {

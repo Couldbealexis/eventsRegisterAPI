@@ -4,7 +4,7 @@ const uuid = require('uuid/v4');
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('event', {
+    return queryInterface.createTable('events', {
       id: {
         allowNull: false,
         primaryKey: true,
@@ -16,7 +16,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'eventType',
+          model: 'eventTypes',
           key: 'id',
         },
       },
@@ -64,6 +64,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('event');
+    return queryInterface.dropTable('events');
   }
 };

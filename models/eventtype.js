@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const eventType = sequelize.define('eventType', {
+  const eventType = sequelize.define('eventTypes', {
     description: DataTypes.STRING,
     status: DataTypes.BOOLEAN,
   }, {});
