@@ -1,16 +1,30 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('userTypes', {
+    return queryInterface.createTable('permissions', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      description: {
-        type: Sequelize.STRING,
+      // foreign key
+      menu: {
+        type: Sequelize.INTEGER,
         allowNull: false,
+        references: {
+          model: 'menus',
+          key: 'id',
+        },
+      },
+      // foreign key
+      user: {
+        type: Sequelize.UUID,
+        allowNull: false,
+        references: {
+          model: 'users',
+          key: 'id',
+        },
       },
       status: {
         type: Sequelize.BOOLEAN,
@@ -26,11 +40,10 @@ module.exports = {
         type: Sequelize.DATE,
       },
     }, {
-      freezeTableName: true,
-      // define the table's name
+      // freezeTableName: true,
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('userTypes');
+    return queryInterface.dropTable('permissions');
   }
 };

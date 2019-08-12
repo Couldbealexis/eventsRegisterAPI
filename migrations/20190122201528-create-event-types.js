@@ -1,30 +1,16 @@
 'use strict';
-
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('eventDetail', {
+    return queryInterface.createTable('eventTypes', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      // foreign key
-      event: {
-        type: Sequelize.UUID,
-        allowNull: false,
-        references: {
-          model: 'event',
-          key: 'id',
-        },
-      },
-      place: {
-        type: Sequelize.STRING,
-        allowNull: true,
-      },
       description: {
         type: Sequelize.STRING,
-        allowNull: true,
+        allowNull: false,
       },
       status: {
         type: Sequelize.BOOLEAN,
@@ -40,10 +26,10 @@ module.exports = {
         type: Sequelize.DATE,
       },
     }, {
-      freezeTableName: true,
+      // freezeTableName: true,
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('eventDetail');
+    return queryInterface.dropTable('eventTypes');
   }
 };

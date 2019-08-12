@@ -1,10 +1,11 @@
 module.exports = (sequelize, DataTypes) => {
-  const eventType = sequelize.define('eventTypes', {
+  const attendeesType = sequelize.define('menus', {
     description: DataTypes.STRING,
+    form: DataTypes.STRING,
     status: DataTypes.BOOLEAN,
   }, {});
-  eventType.associate = function(models) {
+  attendeesType.associate = function(models) {
     // associations can be defined here
   };
-  return eventType;
+  return attendeesType;
 };

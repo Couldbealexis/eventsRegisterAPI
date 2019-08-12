@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "root",
+    "password": "Alexis123",
     "database": "eventsregister",
     "host": "localhost",
     "dialect": "mysql"
@@ -14,10 +14,10 @@
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": "root",
-    "database": "database_production",
-    "host": "127.0.0.1",
+    "username": "gaggdmCeg2",
+    "password": "M8pjMCNJvD",
+    "database": "gaggdmCeg2",
+    "host": "remotemysql.com",
     "dialect": "mysql"
   }
 }

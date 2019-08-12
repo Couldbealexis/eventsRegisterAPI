@@ -14,7 +14,7 @@ module.exports = {
         type: Sequelize.UUID,
         allowNull: false,
         references: {
-          model: 'event',
+          model: 'events',
           key: 'id',
         },
       },
@@ -23,7 +23,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'attendeesType',
+          model: 'attendeesTypes',
           key: 'id',
         },
       },
@@ -49,7 +49,7 @@ module.exports = {
         type: Sequelize.DATE,
       },
     }, {
-      freezeTableName: true,
+      // freezeTableName: true,
     });
   },
   down: (queryInterface, Sequelize) => {

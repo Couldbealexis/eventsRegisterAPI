@@ -11,6 +11,7 @@ const routes = require('./routes/v1');
 // app.use(express.static('public'));
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/api/v1', routes);
 
 // Listen to the App Engine-specified port, or 8080 otherwise
