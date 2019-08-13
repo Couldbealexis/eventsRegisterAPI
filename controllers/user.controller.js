@@ -1,4 +1,3 @@
-const querystring = require('querystring');
 const uuid = require('uuid/v4');
 const db = require('../models/index');
 

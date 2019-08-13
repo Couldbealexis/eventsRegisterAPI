@@ -52,7 +52,7 @@ exports.updateOne = (req, res) => {
   EventType.update(body, {
     where: { id: req.params.id },
   }).then((type) => {
-    if (!type) return sendResponse(res, '404', {}, 'No se pudo actualizar', 'UserType error at update');
+    if (!type) return sendResponse(res, '404', {}, 'No se pudo actualizar', 'EventType error at update');
     return detail(res, req.params.id);
   }).catch((err) => {
     return sendResponse(res, 'false', '400', {}, 'tipo de evento no encontrado', err.message);
