@@ -27,10 +27,11 @@ exports.findAll = (req, res) => {
   Event.findAndCountAll({
     attributes: {
       exclude: ['createdAt', 'updatedAt'],
-    }}).then((types) => {
-      sendResponse(res, 'true', '200', types);
+    },
+  }).then((types) => {
+    sendResponse(res, 'true', '200', types);
   }).catch((err) => {
-      sendResponse(res, 'false', '400', {}, 'No se pudieron obtener los tipos de eventos', err.message);
+    sendResponse(res, 'false', '400', {}, 'No se pudieron obtener los tipos de eventos', err.message);
   });
 };
 
@@ -44,34 +45,35 @@ const detail = (res, id) => {
       model: User,
       as: 'userInCharge',
       attributes: ['id', 'code', 'name'],
-    },{
+    }, {
       model: User,
       as: 'userCreate',
       attributes: ['id', 'code', 'name'],
-    },{
+    }, {
       model: EventType,
       as: 'type',
       attributes: ['id', 'description'],
-    },{
+    }, {
       model: EventDetails,
       as: 'detail',
       attributes: ['place', 'description'],
-      where: {status: 1},
-    },{
+      where: { status: 1 },
+    }, {
       model: EventAttendees,
       as: 'attendees',
+      required: false,
       attributes: ['code', 'name'],
-      where: {status: 1},
+      where: { status: 1 },
       include: [{
         model: AttendeesTypes,
         attributes: ['id', 'description'],
       }],
-    }]
+    }],
   }).then((event) => {
     if (!event) return sendResponse(res, 'false', '404', {}, 'No se encontro el evento', 'Event not found');
     return sendResponse(res, 'true', '200', event);
   }).catch((err) => {
-    return sendResponse(res, 'false', '404', {}, 'No se encontro el evento', err.message);
+    return sendResponse(res, 'false', '400', {}, 'No se encontro el evento', err.message);
   });
 };
 

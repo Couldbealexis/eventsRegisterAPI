@@ -8,11 +8,12 @@ const {
 
 exports.create = (req, res) => {
   const body = req.body;
+  console.log(body);
   let type = UserType.build(body);
   type.save().then(() => {
     sendResponse(res, 'true', '200', type);
   }).catch((err) => {
-    sendResponse(res, 'false', '400', {}, 'No se ha podido crear el tipo de usuario', 'UserType cannot create');
+    sendResponse(res, 'false', '400', {}, 'No se ha podido crear el tipo de usuario', err.message);
   });
 };
 
