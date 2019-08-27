@@ -1,6 +1,6 @@
 const db = require('../models/index');
 
-const EventType = db.eventTypes;
+const EventDetails = db.eventDetail;
 
 const {
   sendResponse,
@@ -8,27 +8,16 @@ const {
 
 exports.create = (req, res) => {
   const body = req.body;
-  let type = EventType.build(body);
-  type.save().then(() => {
-    sendResponse(res, 'true', '200', type);
+  const detail = EventDetails.build(body);
+  detail.save().then(() => {
+    sendResponse(res, 'true', '200', detail);
   }).catch((err) => {
-    sendResponse(res, 'false', '400', {}, 'No se ha podido crear el tipo de evento', err.message);
-  });
-};
-
-exports.findAll = (req, res) => {
-  EventType.findAndCountAll({
-    attributes: {
-      exclude: ['createdAt', 'updatedAt'],
-    }}).then((types) => {
-      sendResponse(res, 'true', '200', types);
-  }).catch((err) => {
-      sendResponse(res, 'false', '400', {}, 'No se pudieron obtener los tipos de eventos', err.message);
+    sendResponse(res, 'false', '400', {}, 'No se ha podido crear el detalle de evento', err.message);
   });
 };
 
 const detail = (res, id) => {
-  EventType.findOne({
+  EventDetails.findOne({
     where: {
       id,
     },
@@ -43,13 +32,9 @@ const detail = (res, id) => {
   });
 };
 
-exports.findOne = (req, res) => {
-  return detail(res, req.params.id);
-};
-
 exports.updateOne = (req, res) => {
   const body = req.body;
-  EventType.update(body, {
+  EventDetails.update(body, {
     where: { id: req.params.id },
   }).then((type) => {
     if (!type) return sendResponse(res, '404', {}, 'No se pudo actualizar', 'EventType error at update');
