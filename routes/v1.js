@@ -9,6 +9,7 @@ const eventDetails = require('./events/eventDetails.routes');
 const eventAttendees = require('./events/eventAttendees.routes');
 const attendeesTypes = require('./events/attendeesTypes.routes');
 const events = require('./events/event.routes');
+const menus = require('./menus/menus');
 
 const app = express();
 
@@ -24,6 +25,9 @@ app.use('/attendeesTypes', attendeesTypes);
 app.use('/eventDetails', eventDetails);
 app.use('/eventAttendees', eventAttendees);
 app.use('/events', events);
+
+// menus
+app.use('/menus', menus);
 
 // login
 app.post('/login', userController.login);

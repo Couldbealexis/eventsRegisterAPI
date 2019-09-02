@@ -37,7 +37,10 @@ const detail = (res, id) => {
 
 exports.findAll = (req, res) => {
   EventAttendees.findAndCountAll({
-    where: { event: req.params.event },
+    where: {
+      event: req.params.event,
+      status: 1,
+    },
   }).then((attendees) => {
     if (!attendees) return sendResponse(res, 'false', '404', {}, 'No se encontraron asistentes', 'Not found');
     return sendResponse(res, 'true', '200', attendees);

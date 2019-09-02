@@ -19,12 +19,14 @@ exports.create = (req, res) => {
 
 exports.findAll = (req, res) => {
   UserType.findAndCountAll({
+    where: { status: 1 },
     attributes: {
-      exclude: ['createdAt', 'updatedAt'],
-    }}).then((types) => {
-      sendResponse(res, 'true', '200', types);
+      exclude: ['createdAt', 'updatedAt', 'status'],
+    },
+  }).then((types) => {
+    sendResponse(res, 'true', '200', types);
   }).catch((err) => {
-      sendResponse(res, 'false', '400', {}, 'No se pudieron obtener los tipos de usuario', err.message);
+    sendResponse(res, 'false', '400', {}, 'No se pudieron obtener los tipos de usuario', err.message);
   });
 };
 

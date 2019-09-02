@@ -8,7 +8,7 @@ const {
 
 exports.create = (req, res) => {
   const body = req.body;
-  let type = AttendeesTypes.build(body);
+  const type = AttendeesTypes.build(body);
   type.save().then(() => {
     sendResponse(res, 'true', '200', type);
   }).catch((err) => {
@@ -18,12 +18,14 @@ exports.create = (req, res) => {
 
 exports.findAll = (req, res) => {
   AttendeesTypes.findAndCountAll({
+    where: { status: 1 },
     attributes: {
-      exclude: ['createdAt', 'updatedAt'],
-    }}).then((types) => {
-      sendResponse(res, 'true', '200', types);
+      exclude: ['createdAt', 'updatedAt', 'status'],
+    },
+  }).then((types) => {
+    sendResponse(res, 'true', '200', types);
   }).catch((err) => {
-      sendResponse(res, 'false', '400', {}, 'No se pudieron obtener los tipos de eventos', err.message);
+    sendResponse(res, 'false', '400', {}, 'No se pudieron obtener los tipos de eventos', err.message);
   });
 };
 
@@ -52,7 +54,7 @@ exports.updateOne = (req, res) => {
   AttendeesTypes.update(body, {
     where: { id: req.params.id },
   }).then((type) => {
-    if (!type) return sendResponse(res, '404', {}, 'No se pudo actualizar', 'UserType error at update');
+    if (!type) return sendResponse(res, '404', {}, 'No se pudo actualizar', 'AttendeesTypes error at update');
     return detail(res, req.params.id);
   }).catch((err) => {
     return sendResponse(res, 'false', '400', {}, 'tipo de evento no encontrado', err.message);

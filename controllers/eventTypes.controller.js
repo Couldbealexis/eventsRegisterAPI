@@ -18,8 +18,9 @@ exports.create = (req, res) => {
 
 exports.findAll = (req, res) => {
   EventType.findAndCountAll({
+    where: { status: 1 },
     attributes: {
-      exclude: ['createdAt', 'updatedAt'],
+      exclude: ['createdAt', 'updatedAt', 'status'],
     }}).then((types) => {
       sendResponse(res, 'true', '200', types);
   }).catch((err) => {
