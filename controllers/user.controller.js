@@ -169,8 +169,21 @@ exports.delete = (req, res) => {
     { where: { id: req.params.id, status: 1 } },
   )
     .then(async (r) => {
-      if (!r) return sendResponse(res, 'false', '404', {}, 'El usuario no fue encontrado, por favor vuelve a itentarlo', 'user not found');
+      if (!r) return sendResponse(res, 'false', '404', {}, 'El usuario no fue encontrado, por favor vuelve a intentarlo', 'user not found');
       return sendResponse(res, 'true', '200', { message: 'Usuario eliminado' });
+    }).catch((err) => {
+      return sendResponse(res, 'false', '400', {}, 'Usuario no encontrado', err.message);
+    });
+};
+
+exports.reactivate = (req, res) => {
+  return User.update(
+    { status: 1 },
+    { where: { id: req.params.id, status: 0 } },
+  )
+    .then(async (r) => {
+      if (!r) return sendResponse(res, 'false', '404', {}, 'El usuario no fue encontrado, por favor vuelve a intentarlo', 'user not found');
+      return detail(res, req.params.id);
     }).catch((err) => {
       return sendResponse(res, 'false', '400', {}, 'Usuario no encontrado', err.message);
     });
@@ -184,7 +197,7 @@ exports.changePassword = (req, res) => {
     { where: { id: req.params.id, status: 1 } },
   )
     .then(async (r) => {
-      if (!r) return sendResponse(res, 'false', '404', {}, 'El usuario no fue encontrado, por favor vuelve a itentarlo', 'user not found');
+      if (!r) return sendResponse(res, 'false', '404', {}, 'El usuario no fue encontrado, por favor vuelve a intentarlo', 'user not found');
       return detail(res, req.params.id);
     }).catch((err) => {
       return sendResponse(res, 'false', '400', {}, 'Usuario no encontrado', err.message);

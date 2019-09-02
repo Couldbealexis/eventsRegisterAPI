@@ -11,5 +11,11 @@ router.get('/', controller.findAll);
 router.get('/:id', controller.findOne);
 // update one
 router.put('/:id', controller.updateOne);
+// delete One
+router.delete('/:id', controller.delete);
+// reactivate One
+router.put('/reactivate/:id', controller.reactivate);
+// change password
+router.put('/recover/:id', controller.changePassword);
 
 module.exports = router;
